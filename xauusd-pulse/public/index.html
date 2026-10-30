@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="John Mugendi Kinyua">
+  <meta name="description" content="XAUUSD Pulse: a live gold intelligence dashboard with news impact, strategy testing and alerts. Published by John Mugendi Kinyua.">
+  <meta name="theme-color" content="#0a0a1a">
+  <title>XAUUSD Pulse | Gold Intelligence</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffd166'/%3E%3Cstop offset='1' stop-color='%23ff4d8d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='700' font-size='26' text-anchor='middle' fill='%230a0a1a'%3EAu%3C/text%3E%3C/svg%3E">
+  <script>try { document.documentElement.dataset.theme = localStorage.getItem('xau_theme') || 'dark'; } catch (e) { /* default theme */ }</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i></div>
+
+  <header class="ticker" aria-live="polite">
+    <div class="brand-row">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">Au</span>
+        <div class="brand-text">
+          <span class="brand-name">XAUUSD PULSE</span>
+          <span class="brand-sub">Gold intelligence &middot; Published by <b>John Mugendi Kinyua</b></span>
+        </div>
+      </div>
+      <span class="hdr-actions">
+        <button id="theme-btn" class="tab" type="button" title="Switch theme" aria-label="Switch theme">&#127769;</button>
+        <button id="alerts-btn" class="tab" type="button">&#128276; Alerts <span id="alerts-count"></span></button>
+        <button id="settings-btn" class="tab" type="button">&#9881;&#65039; Settings</button>
+      </span>
+    </div>
+    <div class="ticker-main">
+      <span class="symbol">XAU/USD</span>
+      <span id="status" class="status connecting"><span class="dot"></span><span id="status-text">CONNECTING</span></span>
+      <span id="price" class="price">--</span>
+      <span id="change" class="change">--</span>
+    </div>
+    <div class="ticker-meta">
+      <span>High <b id="high">--</b></span>
+      <span>Low <b id="low">--</b></span>
+      <span id="source" class="muted">--</span>
+      <span id="updated" class="muted">--</span>
+      <span id="next-event" class="next-event"></span>
+    </div>
+  </header>
+
+  <div class="tape" id="tape" aria-label="Latest headlines" hidden><div class="tape-track" id="tape-track"></div></div>
+
+  <div id="notice" class="notice" hidden></div>
+  <div id="banner" class="banner" hidden></div>
+
+  <section id="alerts" class="settings" hidden>
+    <h2>&#128276; Alerts <span class="tabs"><label class="note sound"><input type="checkbox" id="alerts-sound"> Sound</label> <button id="alerts-read" class="tab" type="button">Mark all read</button></span></h2>
+    <div id="alerts-list"></div>
+  </section>
+
+  <section id="settings" class="settings" hidden>
+    <h2>&#9881;&#65039; Settings: Twelve Data key</h2>
+    <p id="settings-status" class="note">Loading...</p>
+    <p class="note">Get a free key at twelvedata.com (Sign up, then Dashboard, then API Key). Paste it below to set or change it. It is checked first, then saved on this computer only.</p>
+    <div id="settings-form"></div>
+  </section>
+
+  <div class="stratbar" id="stratbar">
+    <label>&#129504; Strategy <select id="strategy-select"></select></label>
+    <span id="strategy-status" class="tabs"></span>
+    <span id="strategy-desc" class="note"></span>
+  </div>
+
+  <main class="grid">
+    <section class="card" id="card-sentiment"><h2>&#129517; Sentiment <small>last 24h of news</small></h2><div id="sentiment" class="body"><p class="muted">Loading...</p></div></section>
+    <section class="card" id="card-signal">
+      <h2>&#9889; Signal <span class="tabs" id="signal-tabs"></span></h2>
+      <div id="signal" class="body"><p class="muted">Loading...</p></div>
+    </section>
+    <section class="card wide" id="card-news">
+      <h2>&#128240; Live news <span class="tabs" id="news-filters"></span></h2>
+      <div id="news" class="body"><p class="muted">Loading...</p></div>
+    </section>
+    <section class="card" id="card-events"><h2>&#128467;&#65039; Upcoming US events</h2><div id="events" class="body"><p class="muted">Loading...</p></div></section>
+    <section class="card" id="card-calc"><h2>&#129518; Position size calculator</h2><div id="calc" class="body"></div></section>
+    <section class="card wide" id="card-perf">
+      <h2>&#128200; Strategy performance <span class="tabs" id="perf-tabs"></span></h2>
+      <div id="perf" class="body"><p class="muted">Loading...</p></div>
+    </section>
+    <section class="card wide" id="card-journal">
+      <h2>&#128210; Live signal journal <span class="tabs" id="journal-tabs"></span></h2>
+      <div id="journal" class="body"><p class="muted">Loading...</p></div>
+    </section>
+    <section class="card wide" id="card-lab">
+      <h2>&#129514; Test lab <span class="tabs" id="lab-tabs"></span></h2>
+      <div id="lab" class="body"><p class="muted">Loading...</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <div id="sources" class="sources"></div>
+    <div class="publisher">
+      <span class="pub-label">Published by</span>
+      <span class="pub-name">John Mugendi Kinyua</span>
+      <a class="pill" href="https://github.com/JohnMugen1" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="pill" href="https://www.linkedin.com/in/john-mugendi-820018378/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+    <div class="legal">XAUUSD Pulse <span id="version">?</span>. Analysis only, not financial advice. Signals and sentiment are rule-based outputs; past performance does not guarantee future results.</div>
+  </footer>
+  <script src="calc.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+* text=auto
+*.bat text eol=crlf
+README_FIRST.txt text eol=crlf
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.pdf binary

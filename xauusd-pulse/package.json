@@ -1,0 +1,47 @@
+{
+  "name": "xauusd-pulse",
+  "version": "2.0.0",
+  "description": "XAUUSD Pulse: a live gold intelligence dashboard with news impact, strategy testing (walk-forward test lab), live signal journal and on-site alerts.",
+  "author": {
+    "name": "John Mugendi Kinyua",
+    "url": "https://github.com/JohnMugen1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnMugen1/xauusd-pulse.git"
+  },
+  "homepage": "https://github.com/JohnMugen1/xauusd-pulse#readme",
+  "bugs": {
+    "url": "https://github.com/JohnMugen1/xauusd-pulse/issues"
+  },
+  "keywords": [
+    "xauusd",
+    "gold",
+    "trading",
+    "dashboard",
+    "backtesting",
+    "walk-forward",
+    "nodejs",
+    "express",
+    "sqlite",
+    "server-sent-events"
+  ],
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "rss-parser": "^3.13.0",
+    "ws": "^8.18.0"
+  }
+}
